@@ -60,6 +60,8 @@ class Proposal(models.Model):
 
 
 class Job(models.Model):
+    image = models.ImageField(upload_to='images/')
+    message = models.TextField()
     proposal = models.ForeignKey(Proposal, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=False)
@@ -94,6 +96,6 @@ class Payment(models.Model):
 
 
 class PaymentAppeal(models.Model):
-    owner = models.ForeignKey(models.Model, on_delete=models.CASCADE)  # Either Employee or Employer
+    owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='payment_appeals')  # Either Employee or Employer
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
     message = models.TextField()
