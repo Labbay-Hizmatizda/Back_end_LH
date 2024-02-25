@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Employee(models.Model):
+    user_id = models.IntegerField()
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
@@ -9,6 +10,7 @@ class Employee(models.Model):
 
 
 class Employer(models.Model):
+    user_id = models.IntegerField()
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
@@ -41,7 +43,7 @@ class EmployerPassport(models.Model):
 
 
 class Order(models.Model):
-    owner = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='order')
     category = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='order_images/')
@@ -51,7 +53,7 @@ class Order(models.Model):
 
 
 class Proposal(models.Model):
-    owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='proposal')
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     message = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
