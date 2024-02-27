@@ -60,8 +60,6 @@ class Proposal(models.Model):
 
 
 class Job(models.Model):
-    image = models.ImageField(upload_to='images/')
-    message = models.TextField()
     proposal = models.ForeignKey(Proposal, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=False)
