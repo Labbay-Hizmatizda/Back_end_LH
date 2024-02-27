@@ -94,6 +94,6 @@ class Payment(models.Model):
 
 
 class PaymentAppeal(models.Model):
-    owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='payment_appeals')  # Either Employee or Employer
+    owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='payment_appeals')
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
     message = models.TextField()
