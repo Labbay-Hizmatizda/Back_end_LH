@@ -5,7 +5,7 @@ class Employee(models.Model):
     user_id = models.IntegerField()
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=12)
     date_created = models.DateTimeField(auto_now_add=True)
 
 
@@ -13,7 +13,7 @@ class Employer(models.Model):
     user_id = models.IntegerField()
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=12)
     date_created = models.DateTimeField(auto_now_add=True)
 
 
@@ -32,14 +32,14 @@ class CV(models.Model):
 
 class EmployeePassport(models.Model):
     owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    personal_number = models.CharField(max_length=20)
-    card_number = models.CharField(max_length=20)
+    personal_number = models.CharField(max_length=14)
+    card_number = models.CharField(max_length=9)
 
 
 class EmployerPassport(models.Model):
     owner = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    personal_number = models.CharField(max_length=20)
-    card_number = models.CharField(max_length=20)
+    personal_number = models.CharField(max_length=14)
+    card_number = models.CharField(max_length=9)
 
 
 class Order(models.Model):
