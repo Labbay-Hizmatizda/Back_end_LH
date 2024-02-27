@@ -6,15 +6,20 @@ class Employee(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=12)
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'{self.name} {self.surname} {self.user_id}'
 
 class Employer(models.Model):
     user_id = models.IntegerField()
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=12)
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.name} {self.surname} {self.user_id}'
 
 
 class EmployeeCard(models.Model):
