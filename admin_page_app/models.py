@@ -76,7 +76,7 @@ class JobAppeal(models.Model):
     message = models.TextField()
 
 
-class EmployeeAppeal(models.Model):
+class EmployeeReview(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
@@ -84,7 +84,7 @@ class EmployeeAppeal(models.Model):
     message = models.TextField()
 
 
-class EmployerAppeal(models.Model):
+class EmployerReview(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     owner = models.ForeignKey(Employer, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
