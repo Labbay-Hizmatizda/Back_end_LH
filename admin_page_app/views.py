@@ -1,36 +1,116 @@
-from django.shortcuts import render
-from .models import *
+# main/views.py
 
-def admin_page_views(request):
-    employees = Employee.objects.all()
-    employers = Employer.objects.all()
-    employee_cards = EmployeeCard.objects.all()
-    cvs = CV.objects.all()
-    employee_passports = EmployeePassport.objects.all()
-    employer_passports = EmployerPassport.objects.all()
-    orders = Order.objects.all()
-    proposals = Proposal.objects.all()
-    jobs = Job.objects.all()
-    job_appeals = JobAppeal.objects.all()
-    employee_appeals = EmployeeAppeal.objects.all()
-    employer_appeals = EmployerAppeal.objects.all()
-    payments = Payment.objects.all()
-    payment_appeals = PaymentAppeal.objects.all()
+from rest_framework import generics
 
-    # Pass all instances to the template
-    return render(request, 'admin.html', {
-        'employees': employees,
-        'employers': employers,
-        'employee_cards': employee_cards,
-        'cvs': cvs,
-        'employee_passports': employee_passports,
-        'employer_passports': employer_passports,
-        'orders': orders,
-        'proposals': proposals,
-        'jobs': jobs,
-        'job_appeals': job_appeals,
-        'employee_appeals': employee_appeals,
-        'employer_appeals': employer_appeals,
-        'payments': payments,
-        'payment_appeals': payment_appeals,
-    })
+from .models import (
+    Employee,
+    Employer,
+    EmployeeCard,
+    CV,
+    EmployeePassport,
+    EmployerPassport,
+    Order,
+    Proposal,
+    Job,
+    JobAppeal,
+    EmployeeReview,
+    EmployerReview,
+    Payment,
+    PaymentAppeal,
+)
+from .serializers import (
+    EmployeeSerializer,
+    EmployerSerializer,
+    EmployeeCardSerializer,
+    CVSerializer,
+    EmployeePassportSerializer,
+    EmployerPassportSerializer,
+    OrderSerializer,
+    ProposalSerializer,
+    JobSerializer,
+    JobAppealSerializer,
+    EmployeeReviewSerializer,
+    EmployerReviewSerializer,
+    PaymentSerializer,
+    PaymentAppealSerializer,
+)
+
+
+class EmployeeListView(generics.ListCreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+
+class EmployeeDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+
+class EmployerListView(generics.ListCreateAPIView):
+    queryset = Employer.objects.all()
+    serializer_class = EmployerSerializer
+
+
+class EmployerDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employer.objects.all()
+    serializer_class = EmployerSerializer
+
+
+class EmployeeCardListView(generics.ListCreateAPIView):
+    queryset = EmployeeCard.objects.all()
+    serializer_class = EmployeeCardSerializer
+
+
+class CVListView(generics.ListCreateAPIView):
+    queryset = CV.objects.all()
+    serializer_class = CVSerializer
+
+
+class EmployeePassportListView(generics.ListCreateAPIView):
+    queryset = EmployeePassport.objects.all()
+    serializer_class = EmployeePassportSerializer
+
+
+class EmployerPassportListView(generics.ListCreateAPIView):
+    queryset = EmployerPassport.objects.all()
+    serializer_class = EmployerPassportSerializer
+
+
+class OrderListView(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class ProposalListView(generics.ListCreateAPIView):
+    queryset = Proposal.objects.all()
+    serializer_class = ProposalSerializer
+
+
+class JobListView(generics.ListCreateAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+
+class JobAppealListView(generics.ListCreateAPIView):
+    queryset = JobAppeal.objects.all()
+    serializer_class = JobAppealSerializer
+
+
+class EmployeeReviewListView(generics.ListCreateAPIView):
+    queryset = EmployeeReview.objects.all()
+    serializer_class = EmployeeReviewSerializer
+
+
+class EmployerReviewListView(generics.ListCreateAPIView):
+    queryset = EmployerReview.objects.all()
+    serializer_class = EmployerReviewSerializer
+
+
+class PaymentListView(generics.ListCreateAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+
+
+class PaymentAppealListView(generics.ListCreateAPIView):
+    queryset = PaymentAppeal.objects.all()
+    serializer_class = PaymentAppealSerializer
