@@ -1,117 +1,223 @@
-# main/views.py
+from django.shortcuts import get_object_or_404
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from rest_framework import generics
-
-from .models import (
-    Employee,
-    Employer,
-    EmployeeCard,
-    CV,
-    EmployeePassport,
-    EmployerPassport,
-    Order,
-    Proposal,
-    Job,
-    JobAppeal,
-    EmployeeReview,
-    EmployerReview,
-    Payment,
-    PaymentAppeal,
-)
+from .models import Employee, Employer, Order, Proposal, Job
 from .serializers import (
     EmployeeSerializer,
     EmployerSerializer,
-    EmployeeCardSerializer,
-    CVSerializer,
-    EmployeePassportSerializer,
-    EmployerPassportSerializer,
     OrderSerializer,
     ProposalSerializer,
     JobSerializer,
-    JobAppealSerializer,
-    EmployeeReviewSerializer,
-    EmployerReviewSerializer,
-    PaymentSerializer,
-    PaymentAppealSerializer,
 )
 
 
-class EmployeeListView(generics.ListCreateAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+class EmployeeListCreateAPIView(APIView):
+    def get(self, request):
+        employees = Employee.objects.all()
+        serializer = EmployeeSerializer(employees, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = EmployeeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class EmployeeDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+class EmployeeDetailAPIView(APIView):
+    def get(self, request, pk):
+        employee = get_object_or_404(Employee, pk=pk)
+        serializer = EmployeeSerializer(employee)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        employee = get_object_or_404(Employee, pk=pk)
+        serializer = EmployeeSerializer(employee, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk):
+        employee = get_object_or_404(Employee, pk=pk)
+        serializer = EmployeeSerializer(employee, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        employee = get_object_or_404(Employee, pk=pk)
+        employee.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class EmployerListView(generics.ListCreateAPIView):
-    queryset = Employer.objects.all()
-    serializer_class = EmployerSerializer
+class EmployerListCreateAPIView(APIView):
+    def get(self, request):
+        employers = Employer.objects.all()
+        serializer = EmployerSerializer(employers, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = EmployerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class EmployerDetailAPIView(APIView):
+    def get(self, request, pk):
+        employer = get_object_or_404(Employer, pk=pk)
+        serializer = EmployerSerializer(employer)
+        return Response(serializer.data)
 
-class EmployerDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Employer.objects.all()
-    serializer_class = EmployerSerializer
+    def put(self, request, pk):
+        employer = get_object_or_404(Employer, pk=pk)
+        serializer = EmployerSerializer(employer, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def patch(self, request, pk):
+        employer = get_object_or_404(Employer, pk=pk)
+        serializer = EmployerSerializer(employer, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class EmployeeCardListView(generics.ListCreateAPIView):
-    queryset = EmployeeCard.objects.all()
-    serializer_class = EmployeeCardSerializer
-
-
-class CVListView(generics.ListCreateAPIView):
-    queryset = CV.objects.all()
-    serializer_class = CVSerializer
-
-
-class EmployeePassportListView(generics.ListCreateAPIView):
-    queryset = EmployeePassport.objects.all()
-    serializer_class = EmployeePassportSerializer
-
-
-class EmployerPassportListView(generics.ListCreateAPIView):
-    queryset = EmployerPassport.objects.all()
-    serializer_class = EmployerPassportSerializer
-
-
-class OrderListView(generics.ListCreateAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+    def delete(self, request, pk):
+        employer = get_object_or_404(Employer, pk=pk)
+        employer.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class ProposalListView(generics.ListCreateAPIView):
-    queryset = Proposal.objects.all()
-    serializer_class = ProposalSerializer
+class OrderListCreateAPIView(APIView):
+    def get(self, request):
+        orders = Order.objects.all()
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = OrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class JobListView(generics.ListCreateAPIView):
-    queryset = Job.objects.all()
-    serializer_class = JobSerializer
+class OrderDetailAPIView(APIView):
+    def get(self, request, pk):
+        order = get_object_or_404(Order, pk=pk)
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        order = get_object_or_404(Order, pk=pk)
+        serializer = OrderSerializer(order, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk):
+        order = get_object_or_404(Order, pk=pk)
+        serializer = OrderSerializer(order, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        order = get_object_or_404(Order, pk=pk)
+        order.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class JobAppealListView(generics.ListCreateAPIView):
-    queryset = JobAppeal.objects.all()
-    serializer_class = JobAppealSerializer
+class ProposalListCreateAPIView(APIView):
+    def get(self, request):
+        proposals = Proposal.objects.all()
+        serializer = ProposalSerializer(proposals, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ProposalSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class EmployeeReviewListView(generics.ListCreateAPIView):
-    queryset = EmployeeReview.objects.all()
-    serializer_class = EmployeeReviewSerializer
+class ProposalDetailAPIView(APIView):
+    def get(self, request, pk):
+        proposal = get_object_or_404(Proposal, pk=pk)
+        serializer = ProposalSerializer(proposal)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        proposal = get_object_or_404(Proposal, pk=pk)
+        serializer = ProposalSerializer(proposal, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk):
+        proposal = get_object_or_404(Proposal, pk=pk)
+        serializer = ProposalSerializer(proposal, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        proposal = get_object_or_404(Proposal, pk=pk)
+        proposal.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class EmployerReviewListView(generics.ListCreateAPIView):
-    queryset = EmployerReview.objects.all()
-    serializer_class = EmployerReviewSerializer
+class JobListCreateAPIView(APIView):
+    def get(self, request):
+        jobs = Job.objects.all()
+        serializer = JobSerializer(jobs, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = JobSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class PaymentListView(generics.ListCreateAPIView):
-    queryset = Payment.objects.all()
-    serializer_class = PaymentSerializer
+class JobDetailAPIView(APIView):
+    def get(self, request, pk):
+        job = get_object_or_404(Job, pk=pk)
+        serializer = JobSerializer(job)
+        return Response(serializer.data)
 
+    def put(self, request, pk):
+        job = get_object_or_404(Job, pk=pk)
+        serializer = JobSerializer(job, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class PaymentAppealListView(generics.ListCreateAPIView):
-    queryset = PaymentAppeal.objects.all()
-    serializer_class = PaymentAppealSerializer
+    def patch(self, request, pk):
+        job = get_object_or_404(Job, pk=pk)
+        serializer = JobSerializer(job, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        job = get_object_or_404(Job, pk=pk)
+        job.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

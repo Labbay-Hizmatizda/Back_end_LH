@@ -11,6 +11,7 @@ class Employee(models.Model):
     def __str__(self):
         return f'{self.name} {self.surname} {self.user_id}'
 
+
 class Employer(models.Model):
     user_id = models.IntegerField()
     name = models.CharField(max_length=100)
