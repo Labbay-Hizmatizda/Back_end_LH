@@ -51,6 +51,7 @@ class EmployerListView(generics.ListCreateAPIView):
     serializer_class = EmployerSerializer
 
 
+
 class EmployerDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
