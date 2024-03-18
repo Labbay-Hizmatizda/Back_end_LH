@@ -1,46 +1,31 @@
-# main/urls.py
-
+# myapp/urls.py
 from django.urls import path
-
 from .views import (
-    EmployeeListView,
-    EmployeeDetailView,
-    EmployerListView,
-    EmployerDetailView,
-    EmployeeCardListView,
-    CVListView,
-    EmployeePassportListView,
-    EmployerPassportListView,
-    OrderListView,
-    ProposalListView,
-    JobListView,
-    JobAppealListView,
-    EmployeeReviewListView,
-    EmployerReviewListView,
-    PaymentListView,
-    PaymentAppealListView,
+    EmployeeListCreateAPIView, EmployeeDetailAPIView,
+    EmployerListCreateAPIView, EmployerDetailAPIView,
+    OrderListCreateAPIView, OrderDetailAPIView,
+    ProposalListCreateAPIView, ProposalDetailAPIView,
+    JobListCreateAPIView, JobDetailAPIView,
 )
 
 urlpatterns = [
-    path('employees/', EmployeeListView.as_view(), name='employee-list'),
-    path('employees/<int:pk>/', EmployeeDetailView.as_view(), name='employee-detail'),
+    # Employee URLs
+    path('employees/', EmployeeListCreateAPIView.as_view(), name='employee-list-create'),
+    path('employees/<int:pk>/', EmployeeDetailAPIView.as_view(), name='employee-detail'),
 
-    path('employers/', EmployerListView.as_view(), name='employer-list'),
-    path('employers/<int:pk>/', EmployerDetailView.as_view(), name='employer-detail'),
+    # Employer URLs
+    path('employers/', EmployerListCreateAPIView.as_view(), name='employer-list-create'),
+    path('employers/<int:pk>/', EmployerDetailAPIView.as_view(), name='employer-detail'),
 
-    path('employeecards/', EmployeeCardListView.as_view(), name='employeecard-list'),
-    path('cvs/', CVListView.as_view(), name='cv-list'),
-    path('employeepassports/', EmployeePassportListView.as_view(), name='employeepassport-list'),
-    path('employerpassports/', EmployerPassportListView.as_view(), name='employerpassport-list'),
+    # Order URLs
+    path('orders/', OrderListCreateAPIView.as_view(), name='order-list-create'),
+    path('orders/<int:pk>/', OrderDetailAPIView.as_view(), name='order-detail'),
 
-    path('orders/', OrderListView.as_view(), name='order-list'),
-    path('proposals/', ProposalListView.as_view(), name='proposal-list'),
-    path('jobs/', JobListView.as_view(), name='job-list'),
-    path('jobappeals/', JobAppealListView.as_view(), name='jobappeal-list'),
+    # Proposal URLs
+    path('proposals/', ProposalListCreateAPIView.as_view(), name='proposal-list-create'),
+    path('proposals/<int:pk>/', ProposalDetailAPIView.as_view(), name='proposal-detail'),
 
-    path('employeereviews/', EmployeeReviewListView.as_view(), name='employeereview-list'),
-    path('employerreviews/', EmployerReviewListView.as_view(), name='employerreview-list'),
-
-    path('payments/', PaymentListView.as_view(), name='payment-list'),
-    path('paymentappeals/', PaymentAppealListView.as_view(), name='paymentappeal-list'),
+    # Job URLs
+    path('jobs/', JobListCreateAPIView.as_view(), name='job-list-create'),
+    path('jobs/<int:pk>/', JobDetailAPIView.as_view(), name='job-detail'),
 ]

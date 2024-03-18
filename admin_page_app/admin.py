@@ -1,21 +1,21 @@
 from django.contrib import admin
+from .models import Employee, Employer, EmployeeCard, CV, EmployeePassport, EmployerPassport
+from .models import Order, Proposal, Job, JobAppeal, EmployeeReview, EmployerReview, Payment, PaymentAppeal
 
+# Register your models here.
 
-class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('')
+admin.site.register(Employee)
+admin.site.register(Employer)
+admin.site.register(EmployeeCard)
+admin.site.register(CV)
+admin.site.register(EmployeePassport)
+admin.site.register(EmployerPassport)
 
-
-class EmployerAdmin(admin.ModelAdmin):
-    list_display = ('')
-
-
-class JobAdmin(admin.ModelAdmin):
-    list_display = ('')
-
-
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ('')
-
-
-class JobpropospalAdmin(admin.ModelAdmin):
-    list_display = ('')
+admin.site.register(Order)
+admin.site.register(Proposal)
+admin.site.register(Job)
+admin.site.register(JobAppeal)
+admin.site.register(EmployeeReview)
+admin.site.register(EmployerReview)
+admin.site.register(Payment)
+admin.site.register(PaymentAppeal)
