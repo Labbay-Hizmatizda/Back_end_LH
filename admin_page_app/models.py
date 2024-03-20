@@ -38,20 +38,22 @@ class CV(models.Model):
 
 class EmployeePassport(models.Model):
     image = models.ImageField(upload_to='passport_images/')
-    owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    owner = models.OneToOneField(Employee, on_delete=models.CASCADE)
     personal_number = models.CharField(max_length=14)
     card_number = models.CharField(max_length=9)
     is_approved = models.BooleanField(default=False)
 
 
 class EmployerPassport(models.Model):
-    owner = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='passport_employer/')
+    owner = models.OneToOneField(Employer, on_delete=models.CASCADE)
     personal_number = models.CharField(max_length=14)
     card_number = models.CharField(max_length=9)
+    is_approved = models.BooleanField(default=False)
 
 
 class Order(models.Model):
-    owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='order')
+    owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='orders')
     category = models.CharField(max_length=100)
     description = models.TextField()
     media = models.CharField(max_length=100)
@@ -61,14 +63,14 @@ class Order(models.Model):
 
 
 class Proposal(models.Model):
-    owner = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='proposal')
+    owner = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='proposals')
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     message = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
 
 class Job(models.Model):
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='job')
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='jobs')
     proposal = models.ForeignKey(Proposal, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=False)
