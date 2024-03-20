@@ -37,9 +37,11 @@ class CV(models.Model):
 
 
 class EmployeePassport(models.Model):
+    image = models.ImageField(upload_to='passport_images/')
     owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
     personal_number = models.CharField(max_length=14)
     card_number = models.CharField(max_length=9)
+    is_approved = models.BooleanField(default=False)
 
 
 class EmployerPassport(models.Model):
@@ -52,8 +54,7 @@ class Order(models.Model):
     owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='order')
     category = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.CharField(upload_to='order_images/')
-    # video = models.FileField(upload_to='order_video/')
+    media = models.CharField(max_length=100)
     location = models.CharField(max_length=255)
     location_link = models.URLField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -67,6 +68,7 @@ class Proposal(models.Model):
 
 
 class Job(models.Model):
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='job')
     proposal = models.ForeignKey(Proposal, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=False)
@@ -95,7 +97,7 @@ class EmployerReview(models.Model):
 
 
 class Payment(models.Model):
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Job, on_delete=models.CASCADE)
     employee_approve = models.BooleanField(default=False)
     employer_approve = models.BooleanField(default=False)
 
