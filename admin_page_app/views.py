@@ -1,10 +1,30 @@
 from rest_framework import generics
 
-from .models import EmployeeCard, CV, EmployeePassport, EmployerPassport, Order, Proposal, Job, JobAppeal, \
+from .models import Employee, Employer, EmployeeCard, CV, EmployeePassport, Order, Proposal, Job, JobAppeal, \
     EmployeeReview, EmployerReview, Payment, PaymentAppeal
-from .serializers import EmployeeCardSerializer, CVSerializer, EmployeePassportSerializer, EmployerPassportSerializer, \
-    OrderSerializer, ProposalSerializer, JobSerializer, JobAppealSerializer, EmployeeReviewSerializer, \
-    EmployerReviewSerializer, PaymentSerializer, PaymentAppealSerializer
+from .serializers import EmployeeSerializer, EmployerSerializer, EmployeeCardSerializer, CVSerializer, \
+    EmployeePassportSerializer, OrderSerializer, ProposalSerializer, JobSerializer, JobAppealSerializer, \
+    EmployeeReviewSerializer, EmployerReviewSerializer, PaymentSerializer, PaymentAppealSerializer
+
+
+class EmployeeListCreate(generics.ListCreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+
+class EmployeeRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+
+class EmployerListCreate(generics.ListCreateAPIView):
+    queryset = Employer.objects.all()
+    serializer_class = EmployerSerializer
+
+
+class EmployerRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employer.objects.all()
+    serializer_class = EmployerSerializer
 
 
 class EmployeeCardListCreate(generics.ListCreateAPIView):
@@ -37,14 +57,14 @@ class EmployeePassportRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIVie
     serializer_class = EmployeePassportSerializer
 
 
-class EmployerPassportListCreate(generics.ListCreateAPIView):
-    queryset = EmployerPassport.objects.all()
-    serializer_class = EmployerPassportSerializer
-
-
-class EmployerPassportRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
-    queryset = EmployerPassport.objects.all()
-    serializer_class = EmployerPassportSerializer
+# class EmployerPassportListCreate(generics.ListAPIView):
+#     queryset = Employer.objects.all()
+#     serializer_class = EmployerSerializer
+#
+# class EmployerPassportRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView)
+#     queryset = Employer.objects.all()
+#     serializer_class = EmployerSerializer
+#
 
 
 class OrderListCreate(generics.ListCreateAPIView):

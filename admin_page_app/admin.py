@@ -9,7 +9,7 @@ admin.site.register(Employer)
 admin.site.register(EmployeeCard)
 admin.site.register(CV)
 admin.site.register(EmployeePassport)
-admin.site.register(EmployerPassport)
+# admin.site.register(EmployerPassport)
 
 admin.site.register(Order)
 admin.site.register(Proposal)

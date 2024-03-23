@@ -39,12 +39,12 @@ class EmployeePassportSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class EmployerPassportSerializer(serializers.ModelSerializer):
-    owner = EmployerSerializer()
-
-    class Meta:
-        model = EmployerPassport
-        fields = '__all__'
+# class EmployerPassportSerializer(serializers.ModelSerializer):
+#     owner = EmployerSerializer()
+#
+#     class Meta:
+#         model = EmployerPassport
+#         fields = '__all__'
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -116,5 +116,3 @@ class PaymentAppealSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentAppeal
         fields = '__all__'
-
-

@@ -44,12 +44,12 @@ class EmployeePassport(models.Model):
     is_approved = models.BooleanField(default=False)
 
 
-class EmployerPassport(models.Model):
-    image = models.ImageField(upload_to='passport_employer/')
-    owner = models.OneToOneField(Employer, on_delete=models.CASCADE)
-    personal_number = models.CharField(max_length=14)
-    card_number = models.CharField(max_length=9)
-    is_approved = models.BooleanField(default=False)
+# class EmployerPassport(models.Model):
+#     image = models.ImageField(upload_to='passport_employer/')
+#     owner = models.OneToOneField(Employer, on_delete=models.CASCADE)
+#     personal_number = models.CharField(max_length=14)
+#     card_number = models.CharField(max_length=9)
+#     is_approved = models.BooleanField(default=False)
 
 
 class Order(models.Model):
