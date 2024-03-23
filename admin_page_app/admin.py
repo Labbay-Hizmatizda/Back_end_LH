@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Employee, Employer, EmployeeCard, CV, EmployeePassport, EmployerPassport
-from .models import Order, Proposal, Job, JobAppeal, EmployeeReview, EmployerReview, Payment, PaymentAppeal
+
+from .models import *
 
 # Register your models here.
 
