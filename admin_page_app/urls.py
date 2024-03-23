@@ -6,7 +6,7 @@ urlpatterns = [
     path('employees/', views.EmployeeListCreate.as_view(), name='employee-list-create'),
     path('employees/<int:pk>/', views.EmployeeRetrieveUpdateDestroy.as_view(), name='employee-retrieve-update-destroy'),
 
-    # URLs for Employer model
+    # # URLs for Employer model
     path('employers/', views.EmployerListCreate.as_view(), name='employer-list-create'),
     path('employers/<int:pk>/', views.EmployerRetrieveUpdateDestroy.as_view(), name='employer-retrieve-update-destroy'),
 
