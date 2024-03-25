@@ -1,4 +1,3 @@
-# views.py
 from rest_framework import generics
 
 from .models import Employee, Employer, Order, Proposal, Job, JobAppeal, EmployeeReview, EmployerReview, Payment, \
@@ -11,6 +10,28 @@ from .serializers import EmployeeSerializer, EmployerSerializer, EmployeePasspor
 class EmployeeListCreateAPIView(generics.ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        # Filtratsiya uchun parametrlarni olish
+        name = self.request.query_params.get('name', None)
+        surname = self.request.query_params.get('surname', None)
+        location = self.request.query_params.get('location', None)
+
+        # Agar name berilgan bo'lsa, nomga qarab filtratsiya qilish
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+
+        # Agar surname berilgan bo'lsa, familiyaga qarab filtratsiya qilish
+        if surname:
+            queryset = queryset.filter(surname__icontains=surname)
+
+        # Agar location berilgan bo'lsa, joylashuvga qarab filtratsiya qilish
+        if location:
+            queryset = queryset.filter(location__icontains=location)
+
+        return queryset
 
 
 class EmployeeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
