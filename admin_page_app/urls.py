@@ -22,11 +22,11 @@ urlpatterns = [
     path('employers/', EmployerListCreateAPIView.as_view(), name='employer-list-create'),
     path('employers/<int:pk>/', EmployerDetailAPIView.as_view(), name='employer-detail'),
 
-    path('employee-passports/', EmployeePassportListCreateAPIView.as_view(), name='employee-passport-list-create'),
-    path('employee-passports/<int:pk>/', EmployeePassportDetailAPIView.as_view(), name='employee-passport-detail'),
+    path('employee_passports/', EmployeePassportListCreateAPIView.as_view(), name='employee-passport-list-create'),
+    path('employee_passports/<int:pk>/', EmployeePassportDetailAPIView.as_view(), name='employee-passport-detail'),
 
-    path('employee-cards/', EmployeeCardListCreateAPIView.as_view(), name='employee-card-list-create'),
-    path('employee-cards/<int:pk>/', EmployeeCardDetailAPIView.as_view(), name='employee-card-detail'),
+    path('employee_cards/', EmployeeCardListCreateAPIView.as_view(), name='employee-card-list-create'),
+    path('employee_cards/<int:pk>/', EmployeeCardDetailAPIView.as_view(), name='employee-card-detail'),
 
     path('orders/', OrderListCreateAPIView.as_view(), name='order-list-create'),
     path('orders/<int:pk>/', OrderDetailAPIView.as_view(), name='order-detail'),
@@ -37,8 +37,8 @@ urlpatterns = [
     path('jobs/', JobListCreateAPIView.as_view(), name='job-list-create'),
     path('jobs/<int:pk>/', JobDetailAPIView.as_view(), name='job-detail'),
 
-    path('job-appeals/', JobAppealListCreateAPIView.as_view(), name='job-appeal-list-create'),
-    path('job-appeals/<int:pk>/', JobAppealDetailAPIView.as_view(), name='job-appeal-detail'),
+    path('job_appeals/', JobAppealListCreateAPIView.as_view(), name='job-appeal-list-create'),
+    path('job_appeals/<int:pk>/', JobAppealDetailAPIView.as_view(), name='job-appeal-detail'),
 
     path('employee-reviews/', EmployeeReviewListCreateAPIView.as_view(), name='employee-review-list-create'),
     path('employee-reviews/<int:pk>/', EmployeeReviewDetailAPIView.as_view(), name='employee-review-detail'),
