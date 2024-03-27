@@ -52,9 +52,16 @@ class EmployeePassport(models.Model):
 #     is_approved = models.BooleanField(default=False)
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Order(models.Model):
     owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='orders')
-    category = models.CharField(max_length=100)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
     description = models.TextField()
     media = models.CharField(max_length=100)
     location = models.CharField(max_length=255)

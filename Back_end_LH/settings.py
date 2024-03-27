@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'admin_page_app',
     'rest_framework',
     'corsheaders',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
