@@ -40,17 +40,17 @@ urlpatterns = [
     path('job_appeals/', JobAppealListCreateAPIView.as_view(), name='job-appeal-list-create'),
     path('job_appeals/<int:pk>/', JobAppealDetailAPIView.as_view(), name='job-appeal-detail'),
 
-    path('employee-reviews/', EmployeeReviewListCreateAPIView.as_view(), name='employee-review-list-create'),
-    path('employee-reviews/<int:pk>/', EmployeeReviewDetailAPIView.as_view(), name='employee-review-detail'),
+    path('employee_reviews/', EmployeeReviewListCreateAPIView.as_view(), name='employee-review-list-create'),
+    path('employee_reviews/<int:pk>/', EmployeeReviewDetailAPIView.as_view(), name='employee-review-detail'),
 
-    path('employer-reviews/', EmployerReviewListCreateAPIView.as_view(), name='employer-review-list-create'),
-    path('employer-reviews/<int:pk>/', EmployerReviewDetailAPIView.as_view(), name='employer-review-detail'),
+    path('employer_reviews/', EmployerReviewListCreateAPIView.as_view(), name='employer-review-list-create'),
+    path('employer_reviews/<int:pk>/', EmployerReviewDetailAPIView.as_view(), name='employer-review-detail'),
 
     path('payments/', PaymentListCreateAPIView.as_view(), name='payment-list-create'),
     path('payments/<int:pk>/', PaymentDetailAPIView.as_view(), name='payment-detail'),
 
-    path('payment-appeals/', PaymentAppealListCreateAPIView.as_view(), name='payment-appeal-list-create'),
-    path('payment-appeals/<int:pk>/', PaymentAppealDetailAPIView.as_view(), name='payment-appeal-detail'),
+    path('payment_appeals/', PaymentAppealListCreateAPIView.as_view(), name='payment-appeal-list-create'),
+    path('payment_appeals/<int:pk>/', PaymentAppealDetailAPIView.as_view(), name='payment-appeal-detail'),
 
     path('cvs/', CVListCreateAPIView.as_view(), name='cv-list-create'),
     path('cvs/<int:pk>/', CVDetailAPIView.as_view(), name='cv-detail'),
