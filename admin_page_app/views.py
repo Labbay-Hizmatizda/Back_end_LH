@@ -3,7 +3,7 @@ from rest_framework import generics
 
 from .models import Employee, Employer, EmployeeCard, CV, EmployeePassport, Order, Proposal, Job, JobAppeal, \
     EmployeeReview, EmployerReview, Payment, PaymentAppeal
-from .serializers import EmployeeSerializer, EmployerSerializer, EmployeeCardSerializer, CVSerializer, \
+from .serializers import EmployeeSerializer, EmployerSerializer, EmployeeCardSerializer, CvSerializer, \
     EmployeePassportSerializer, OrderSerializer, ProposalSerializer, JobSerializer, JobAppealSerializer, \
     EmployeeReviewSerializer, EmployerReviewSerializer, PaymentSerializer, PaymentAppealSerializer
 
@@ -66,12 +66,12 @@ class EmployeeCardDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIVi
 
 class CVListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
     queryset = CV.objects.all()
-    serializer_class = CVSerializer
+    serializer_class = CvSerializer
 
 
 class CVDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
     queryset = CV.objects.all()
-    serializer_class = CVSerializer
+    serializer_class = CvSerializer
 
 
 class EmployeePassportListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
