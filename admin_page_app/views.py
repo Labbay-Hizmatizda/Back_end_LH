@@ -1,4 +1,3 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 
 from .models import Employee, Employer, EmployeeCard, CV, EmployeePassport, Order, Proposal, Job, JobAppeal, \
@@ -8,157 +7,164 @@ from .serializers import EmployeeSerializer, EmployerSerializer, EmployeeCardSer
     EmployeeReviewSerializer, EmployerReviewSerializer, PaymentSerializer, PaymentAppealSerializer
 
 
-class FilterMixin:
-    filter_backends = [DjangoFilterBackend]
+
+class EmployeeListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
-
-        # Filtratsiya uchun parametrlarni olish
+        user_id = self.request.query_params.get('user_id', None)
         name = self.request.query_params.get('name', None)
         surname = self.request.query_params.get('surname', None)
-        location = self.request.query_params.get('location', None)
+        phone_number = self.request.query_params.get('phone_number', None)
 
-        # Agar name berilgan bo'lsa, nomga qarab filtratsiya qilish
+        if user_id:
+            queryset = queryset.filter(user_id=user_id)
         if name:
-            queryset = queryset.filter(name__icontains=name)
-
-        # Agar surname berilgan bo'lsa, familiyaga qarab filtratsiya qilish
+            queryset = queryset.filter(name=name)
         if surname:
-            queryset = queryset.filter(surname__icontains=surname)
-
-        # Agar location berilgan bo'lsa, joylashuvga qarab filtratsiya qilish
-        if hasattr(self.queryset.model, 'location') and location:
-            queryset = queryset.filter(location__icontains=location)
+            queryset = queryset.filter(surname=surname)
+        if phone_number:
+            queryset = queryset.filter(phone_number=phone_number)
 
         return queryset
 
 
-class EmployeeListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class EmployeeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
 
-class EmployeeDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-
-
-class EmployerListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class EmployerListCreateAPIView(generics.ListCreateAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
 
 
-class EmployerDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class EmployerDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
 
 
-class EmployeeCardListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
     queryset = EmployeeCard.objects.all()
     serializer_class = EmployeeCardSerializer
 
 
-class EmployeeCardDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class EmployeeCardDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployeeCard.objects.all()
     serializer_class = EmployeeCardSerializer
 
 
-class CVListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class CVListCreateAPIView(generics.ListCreateAPIView):
+    queryset = CV.objects.all()
+    serializer_class = CvSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        owner = self.request.query_params.get('owner', None)
+        rating = self.request.query_params.get('rating', None)
+        rating = self.request.query_params.get('rating', None)
+
+
+        if owner:
+            queryset = queryset.filter(owner=owner)
+        if rating:
+            queryset = queryset.filter(rating=rating)
+
+        return queryset
+
+
+class CVDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CV.objects.all()
     serializer_class = CvSerializer
 
 
-class CVDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
-    queryset = CV.objects.all()
-    serializer_class = CvSerializer
-
-
-class EmployeePassportListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class EmployeePassportListCreateAPIView( generics.ListCreateAPIView):
     queryset = EmployeePassport.objects.all()
     serializer_class = EmployeePassportSerializer
 
 
-class EmployeePassportDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class EmployeePassportDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployeePassport.objects.all()
     serializer_class = EmployeePassportSerializer
 
 
-class OrderListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class OrderListCreateAPIView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
 
-class OrderDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class OrderDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
 
-class ProposalListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class ProposalListCreateAPIView(generics.ListCreateAPIView):
     queryset = Proposal.objects.all()
     serializer_class = ProposalSerializer
 
 
-class ProposalDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class ProposalDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Proposal.objects.all()
     serializer_class = ProposalSerializer
 
 
-class JobListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class JobListCreateAPIView(generics.ListCreateAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
 
 
-class JobDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class JobDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
 
 
-class JobAppealListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class JobAppealListCreateAPIView(generics.ListCreateAPIView):
     queryset = JobAppeal.objects.all()
     serializer_class = JobAppealSerializer
 
 
-class JobAppealDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class JobAppealDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = JobAppeal.objects.all()
     serializer_class = JobAppealSerializer
 
 
-class EmployeeReviewListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class EmployeeReviewListCreateAPIView( generics.ListCreateAPIView):
     queryset = EmployeeReview.objects.all()
     serializer_class = EmployeeReviewSerializer
 
 
-class EmployeeReviewDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class EmployeeReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployeeReview.objects.all()
     serializer_class = EmployeeReviewSerializer
 
 
-class EmployerReviewListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class EmployerReviewListCreateAPIView(generics.ListCreateAPIView):
     queryset = EmployerReview.objects.all()
     serializer_class = EmployerReviewSerializer
 
 
-class EmployerReviewDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class EmployerReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployerReview.objects.all()
     serializer_class = EmployerReviewSerializer
 
 
-class PaymentListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class PaymentListCreateAPIView(generics.ListCreateAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
 
 
-class PaymentDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class PaymentDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
 
 
-class PaymentAppealListCreateAPIView(FilterMixin, generics.ListCreateAPIView):
+class PaymentAppealListCreateAPIView(generics.ListCreateAPIView):
     queryset = PaymentAppeal.objects.all()
     serializer_class = PaymentAppealSerializer
 
 
-class PaymentAppealDetailAPIView(FilterMixin, generics.RetrieveUpdateDestroyAPIView):
+class PaymentAppealDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = PaymentAppeal.objects.all()
     serializer_class = PaymentAppealSerializer
