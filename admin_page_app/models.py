@@ -30,7 +30,7 @@ class EmployeeCard(models.Model):
 
 
 class CV(models.Model):
-    owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    owner_id = models.OneToOneField(Employee, on_delete=models.CASCADE)
     media = models.ImageField(upload_to="cv_images/")
     bio = models.TextField()
     rating = models.IntegerField(default=1, choices=[(i, i) for i in range(1, 6)])
