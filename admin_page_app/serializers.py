@@ -1,8 +1,6 @@
-# serializers.py
 from rest_framework import serializers
 
-from .models import Employee, Employer, Order, Proposal, Job, JobAppeal, EmployeeReview, EmployerReview, Payment, \
-    PaymentAppeal, EmployeePassport, EmployeeCard, CV
+from .models import *
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -17,14 +15,32 @@ class EmployerSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class EmployeeCardSerializer(serializers.ModelSerializer):
+    owner_id = serializers.StringRelatedField()
+
+    class Meta:
+        model = EmployeeCard
+        fields = '__all__'
+
+
+class CVSerializer(serializers.ModelSerializer):
+    owner_id = serializers.StringRelatedField()
+
+    class Meta:
+        model = CV
+        fields = '__all__'
+
+
 class EmployeePassportSerializer(serializers.ModelSerializer):
+    owner_id = serializers.StringRelatedField()
+
     class Meta:
         model = EmployeePassport
         fields = '__all__'
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    owner = serializers.StringRelatedField()
+    owner_id = serializers.StringRelatedField()
 
     class Meta:
         model = Order
@@ -32,26 +48,10 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class ProposalSerializer(serializers.ModelSerializer):
-    owner = serializers.StringRelatedField()
+    owner_id = serializers.StringRelatedField()
 
     class Meta:
-        model = Proposal
-        fields = '__all__'
-
-
-class EmployeeCardSerializer(serializers.ModelSerializer):
-    owner = serializers.StringRelatedField()
-
-    class Meta:
-        model = EmployeeCard
-        fields = '__all__'
-
-
-class CvSerializer(serializers.ModelSerializer):
-    owner = serializers.StringRelatedField()
-
-    class Meta:
-        model = CV
+        model = Proposals
         fields = '__all__'
 
 
@@ -62,18 +62,24 @@ class JobSerializer(serializers.ModelSerializer):
 
 
 class JobAppealSerializer(serializers.ModelSerializer):
+    owner_id = serializers.StringRelatedField()
+
     class Meta:
         model = JobAppeal
         fields = '__all__'
 
 
 class EmployeeReviewSerializer(serializers.ModelSerializer):
+    owner_id = serializers.StringRelatedField()
+
     class Meta:
         model = EmployeeReview
         fields = '__all__'
 
 
 class EmployerReviewSerializer(serializers.ModelSerializer):
+    owner_id = serializers.StringRelatedField()
+
     class Meta:
         model = EmployerReview
         fields = '__all__'
@@ -86,7 +92,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 
 
 class PaymentAppealSerializer(serializers.ModelSerializer):
-    owner = serializers.StringRelatedField()
+    owner_id = serializers.StringRelatedField()
 
     class Meta:
         model = PaymentAppeal

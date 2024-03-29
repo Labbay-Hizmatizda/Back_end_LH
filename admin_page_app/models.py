@@ -9,7 +9,7 @@ class Employee(models.Model):
     date_created = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.name} {self.surname} {self.user_id}'
+        return f"{self.name} {self.surname} {self.user_id}"
 
 
 class Employer(models.Model):
@@ -20,36 +20,26 @@ class Employer(models.Model):
     date_created = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.name} {self.surname} {self.user_id}'
+        return f"{self.name} {self.surname} {self.user_id}"
 
 
 class EmployeeCard(models.Model):
-    owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    holder_name = models.CharField(max_length=100)
-    number = models.CharField(max_length=16)
+    owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    card_holder = models.CharField(max_length=100)
+    holder_name = models.CharField(max_length=16)
 
 
 class CV(models.Model):
-    owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='cv_images/')
+    owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    media = models.ImageField(upload_to="cv_images/")
     bio = models.TextField()
     rating = models.IntegerField(default=1, choices=[(i, i) for i in range(1, 6)])
 
 
 class EmployeePassport(models.Model):
-    image = models.ImageField(upload_to='passport_images/')
-    owner = models.OneToOneField(Employee, on_delete=models.CASCADE)
-    personal_number = models.CharField(max_length=14)
-    card_number = models.CharField(max_length=9)
+    images_dir = models.ImageField(upload_to="passport_images/")
+    owner_id = models.OneToOneField(Employee, on_delete=models.CASCADE)
     is_approved = models.BooleanField(default=False)
-
-
-# class EmployerPassport(models.Model):
-#     image = models.ImageField(upload_to='passport_employer/')
-#     owner = models.OneToOneField(Employer, on_delete=models.CASCADE)
-#     personal_number = models.CharField(max_length=14)
-#     card_number = models.CharField(max_length=9)
-#     is_approved = models.BooleanField(default=False)
 
 
 class Category(models.Model):
@@ -60,8 +50,8 @@ class Category(models.Model):
 
 
 class Order(models.Model):
-    owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='orders')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
+    owner_id = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name="orders")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category")
     description = models.TextField()
     media = models.CharField(max_length=100)
     location = models.CharField(max_length=255)
@@ -69,38 +59,37 @@ class Order(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
 
-class Proposal(models.Model):
-    owner = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='proposals')
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    message = models.TextField()
+class Proposals(models.Model):
+    owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="proposals")
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
 
 class Job(models.Model):
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='jobs')
-    proposal = models.ForeignKey(Proposal, on_delete=models.CASCADE)
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="jobs")
+    proposal_id = models.ForeignKey(Proposals, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=False)
 
 
 class JobAppeal(models.Model):
-    owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Job, on_delete=models.CASCADE)
     message = models.TextField()
 
 
 class EmployeeReview(models.Model):
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    owner = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Job, on_delete=models.CASCADE)
+    owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     rate = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     message = models.TextField()
 
 
 class EmployerReview(models.Model):
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    owner = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Job, on_delete=models.CASCADE)
+    owner_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     rate = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     message = models.TextField()
 
@@ -112,6 +101,6 @@ class Payment(models.Model):
 
 
 class PaymentAppeal(models.Model):
-    owner = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='payment_appeals')
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    owner_id = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name="payment_appeals")
+    payment_id = models.ForeignKey(Payment, on_delete=models.CASCADE)
     message = models.TextField()
