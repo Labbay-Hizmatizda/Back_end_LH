@@ -28,8 +28,8 @@ urlpatterns = [
     path('orders/<int:pk>/', views.OrderRetrieveUpdateDestroyAPIView.as_view(), name='order-detail'),
 
     # Proposal URLs
-    path('proposals/', views.ProposalListCreateAPIView.as_view(), name='proposal-list'),
-    path('proposals/<int:pk>/', views.ProposalRetrieveUpdateDestroyAPIView.as_view(), name='proposal-detail'),
+    path('proposals/', views.ProposalsListCreateAPIView.as_view(), name='proposal-list'),
+    path('proposals/<int:pk>/', views.ProposalsRetrieveUpdateDestroyAPIView.as_view(), name='proposal-detail'),
 
     # Job URLs
     path('jobs/', views.JobListCreateAPIView.as_view(), name='job-list'),

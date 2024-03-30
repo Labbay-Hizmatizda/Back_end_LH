@@ -147,9 +147,9 @@ class OrderRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OrderSerializer
 
 
-class ProposalListCreateAPIView(generics.ListCreateAPIView):
+class ProposalsListCreateAPIView(generics.ListCreateAPIView):
     queryset = Proposals.objects.all()
-    serializer_class = ProposalSerializer
+    serializer_class = ProposalsSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -167,9 +167,9 @@ class ProposalListCreateAPIView(generics.ListCreateAPIView):
         return queryset
 
 
-class ProposalRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+class ProposalsRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Proposals.objects.all()
-    serializer_class = ProposalSerializer
+    serializer_class = ProposalsSerializer
 
 
 class JobListCreateAPIView(generics.ListCreateAPIView):
