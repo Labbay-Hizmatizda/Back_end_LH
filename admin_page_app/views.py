@@ -110,12 +110,10 @@ class EmployeePassportListCreateAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
-        rating = self.request.query_params.get('rating', None)
 
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
-        if rating:
-            queryset = queryset.filter(rating=rating)
+
 
         return queryset
 

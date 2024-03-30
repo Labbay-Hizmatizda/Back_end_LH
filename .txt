@@ -1,0 +1,86 @@
+Employee 
+employees/?
+    user_id
+    name
+    surname
+    phone_number
+
+
+Employer 
+employers/?
+    user_id
+    name
+    surname
+    phone_number
+
+
+EmployeeCard
+employee_cards/?
+    owner_id
+    card_holder
+
+
+CV
+cvs/?
+    owner_id
+    rating
+
+
+EmployeePassport
+employee_passports/?
+    owner_id
+
+
+Order
+orders/?
+    owner_id
+    category
+    price
+
+
+Proposals
+proposals/?
+    owner_id
+    order_id
+    price
+
+
+Job
+jobs/?
+    order_id
+    proposal_id
+    price
+    rating
+
+
+Job Appeal
+job_appeals/?
+    owner_id
+    order_id
+    price
+
+
+Employee Review
+employee_reviews/?
+    job_id
+    owner_id
+    employer_id
+    rate
+
+
+Employer Review
+employer_reviews/?
+    job_id
+    owner_id
+    employer_id
+    rate
+
+
+Payment
+payments/?
+    job_id
+
+
+Payment Appeals
+payment_appeals/?
+    owner_id
