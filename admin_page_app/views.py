@@ -114,7 +114,6 @@ class EmployeePassportListCreateAPIView(generics.ListCreateAPIView):
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
 
-
         return queryset
 
 
@@ -157,7 +156,7 @@ class ProposalListCreateAPIView(generics.ListCreateAPIView):
         owner_id = self.request.query_params.get('owner_id', None)
         order_id = self.request.query_params.get('order_id', None)
         price = self.request.query_params.get('price', None)
-    
+
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
         if price:
@@ -210,7 +209,7 @@ class JobAppealListCreateAPIView(generics.ListCreateAPIView):
         owner_id = self.request.query_params.get('owner_id', None)
         order_id = self.request.query_params.get('order_id', None)
         price = self.request.query_params.get('price', None)
-    
+
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
         if price:
@@ -237,7 +236,6 @@ class EmployeeReviewListCreateAPIView(generics.ListCreateAPIView):
         employer_id = self.request.query_params.get('employer_id', None)
         rate = self.request.query_params.get('rate', None)
 
-    
         if job_id:
             queryset = queryset.filter(job_id=job_id)
         if owner_id:
@@ -266,7 +264,6 @@ class EmployerReviewListCreateAPIView(generics.ListCreateAPIView):
         employer_id = self.request.query_params.get('employer_id', None)
         rate = self.request.query_params.get('rate', None)
 
-    
         if job_id:
             queryset = queryset.filter(job_id=job_id)
         if owner_id:
@@ -291,11 +288,11 @@ class PaymentListCreateAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         job_id = self.request.query_params.get('job_id', None)
-    
+
         if job_id:
             queryset = queryset.filter(job_id=job_id)
 
-        return queryset 
+        return queryset
 
 
 class PaymentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -310,12 +307,11 @@ class PaymentAppealListCreateAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
-    
+
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
 
-        return queryset 
-
+        return queryset
 
 
 class PaymentAppealRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
