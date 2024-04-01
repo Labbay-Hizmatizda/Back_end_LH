@@ -21,7 +21,10 @@ urlpatterns = [
 
     # Employee Passport URLs
     path('employee_passports/', views.EmployeePassportListCreateAPIView.as_view(), name='employee-passport-list'),
-    path('employee_passports/<int:pk>/', views.EmployeePassportRetrieveUpdateDestroyAPIView.as_view(), name='employee-passport-detail'),
+    path('employee_passports/<int:pk>/', views.EmployeePassportRetrieveUpdateDestroyAPIView.as_view(),name='employee-passport-detail'),
+
+    path('category/', views.CategoryListCreateAPIView.as_view(), name='category-list'),
+    path('category/<int:pk>/', views.CategoryRetrieveUpdateDeleteAPIView.as_view(), name='category-detail'),
 
     # Order URLs
     path('orders/', views.OrderListCreateAPIView.as_view(), name='order-list'),

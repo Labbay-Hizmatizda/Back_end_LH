@@ -9,7 +9,7 @@ class Employee(models.Model):
     date_created = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} {self.surname} {self.user_id}"
+        return f"{self.name} {self.surname} "
 
 
 class Employer(models.Model):
@@ -20,7 +20,7 @@ class Employer(models.Model):
     date_created = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} {self.surname} {self.user_id}"
+        return f"{self.name} {self.surname}"
 
 
 class EmployeeCard(models.Model):

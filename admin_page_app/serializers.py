@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from .models import *
+from .models import Employee, Employer, EmployeeCard, CV, EmployeePassport, Order, Proposals, JobAppeal, \
+    EmployeeReview, EmployerReview, Payment, PaymentAppeal, Job, Category
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -20,9 +21,15 @@ class EmployeeCardSerializer(serializers.ModelSerializer):
         model = EmployeeCard
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employee.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
 
 
@@ -31,9 +38,15 @@ class CVSerializer(serializers.ModelSerializer):
         model = CV
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employee.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
 
 
@@ -42,26 +55,32 @@ class EmployeePassportSerializer(serializers.ModelSerializer):
         model = EmployeePassport
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employee.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
 
-
-# class CategorySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Category
-#         fields = '__all__'
-#
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employer.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employer.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employer.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
 
 
@@ -70,10 +89,22 @@ class ProposalsSerializer(serializers.ModelSerializer):
         model = Proposals
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employee.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
 
 
 class JobSerializer(serializers.ModelSerializer):
@@ -87,9 +118,15 @@ class JobAppealSerializer(serializers.ModelSerializer):
         model = JobAppeal
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employee.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
 
 
@@ -98,9 +135,15 @@ class EmployeeReviewSerializer(serializers.ModelSerializer):
         model = EmployeeReview
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employee.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employee.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
 
 
@@ -109,9 +152,15 @@ class EmployerReviewSerializer(serializers.ModelSerializer):
         model = EmployerReview
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employer.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employer.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employer.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
 
 
@@ -126,7 +175,13 @@ class PaymentAppealSerializer(serializers.ModelSerializer):
         model = PaymentAppeal
         fields = '__all__'
 
+    def get_owner_id(self, instance):
+        owner = Employer.objects.get(id=instance.owner_id_id)
+        return f"{owner.name} {owner.surname}"
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['owner_id'] = Employer.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        owner = Employer.objects.filter(id=instance.owner_id_id).values('name', 'surname').first()
+        if owner:
+            data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
