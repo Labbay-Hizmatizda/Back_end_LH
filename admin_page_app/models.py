@@ -25,8 +25,8 @@ class Employer(models.Model):
 
 class EmployeeCard(models.Model):
     owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    card_holder = models.CharField(max_length=100)
-    holder_name = models.CharField(max_length=16)
+    holder_name = models.CharField(max_length=100)
+    card_number = models.IntegerField(default=0,)
 
 
 class CV(models.Model):

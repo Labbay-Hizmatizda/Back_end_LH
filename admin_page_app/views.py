@@ -66,12 +66,12 @@ class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
-        card_holder = self.request.query_params.get('card_holder', None)
+        holder_name = self.request.query_params.get('holder_name', None)
 
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
-        if card_holder:
-            queryset = queryset.filter(name=card_holder)
+        if holder_name:
+            queryset = queryset.filter(holder_name=holder_name)
 
         return queryset
 
