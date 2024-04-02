@@ -37,7 +37,7 @@ urlpatterns = [
     path('employee_reviews/', views.EmployeeReviewListCreateAPIView.as_view(), name='employee-review-list'),
 
     # Employer Review URLs
-    path('employer_reviews/<int:pk>/', views.EmployerReviewRetrieveUpdateDestroyAPIView.as_view(), name='employer-review-detail'),
+    path('employer_reviews/', views.EmployerReviewListCreateAPIView.as_view(), name='employer-review-list'),
 
     # Payment URLs
     path('payments/', views.PaymentListCreateAPIView.as_view(), name='payment-list'),
