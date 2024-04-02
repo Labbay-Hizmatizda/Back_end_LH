@@ -8,6 +8,7 @@ urlpatterns = [
 
     # Employer URLs
     path('employers/', views.EmployerListCreateAPIView.as_view(), name='employer-list'),
+    path('employers_patch/', views.EmployerDetailAPIView.as_view(), name='employer-list'),
 
     # Employee Card URLs
     path('employee_cards/', views.EmployeeCardListCreateAPIView.as_view(), name='employee-card-list'),

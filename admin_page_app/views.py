@@ -27,7 +27,7 @@ class EmployeeListCreateAPIView(generics.ListCreateAPIView):
         return queryset
 
 
-class EmployerListCreateAPIView(generics.RetrieveUpdateDestroyAPIView):
+class EmployerListCreateAPIView(generics.ListCreateAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
 
@@ -48,6 +48,13 @@ class EmployerListCreateAPIView(generics.RetrieveUpdateDestroyAPIView):
             queryset = queryset.filter(phone_number=phone_number)
 
         return queryset
+
+from rest_framework import generics
+
+class EmployerDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employer.objects.all()
+    serializer_class = EmployerSerializer
+
     
 
 class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
