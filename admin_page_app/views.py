@@ -49,11 +49,11 @@ class EmployerListCreateAPIView(generics.ListCreateAPIView):
 
         return queryset
 
-from rest_framework import generics
 
 class EmployerDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
+    lookup_field = 'pk'        
 
     def patch(self, request, *args, **kwargs):
         employer = self.get_object()
