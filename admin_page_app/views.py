@@ -55,7 +55,12 @@ class EmployerDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
 
-    
+    def patch(self, request, *args, **kwargs):
+        employer = self.get_object()
+        serializer = self.get_serializer(employer, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
 
 class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
     queryset = EmployeeCard.objects.all()
