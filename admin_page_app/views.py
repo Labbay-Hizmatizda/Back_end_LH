@@ -83,11 +83,6 @@ class CVListCreateAPIView(generics.ListCreateAPIView):
         return queryset
 
 
-class CategoryListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-
 class EmployeePassportListCreateAPIView(generics.ListCreateAPIView):
     queryset = EmployeePassport.objects.all()
     serializer_class = EmployeePassportSerializer
@@ -262,3 +257,8 @@ class PaymentAppealListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(owner_id=owner_id)
 
         return queryset
+
+
+class CategoryListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
