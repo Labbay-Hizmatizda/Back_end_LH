@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     # Employee URLs
     path('employees/', views.EmployeeListCreateAPIView.as_view(), name='employee-list'),
-    path('employees/<int:pk>/', views.Employee.as_view(), name='employee-list'),
+    path('employees/<int:pk>/', views.EmployeeDetailAPIView.as_view(), name='employee-list'),
     
     # Employer URLs
     path('employers/', views.EmployerListCreateAPIView.as_view(), name='employer-list'),
