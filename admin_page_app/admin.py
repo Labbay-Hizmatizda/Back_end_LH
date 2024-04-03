@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import *
 
+admin.site.register(Languages)
 admin.site.register(Employee)
 admin.site.register(Employer)
 admin.site.register(EmployeeCard)

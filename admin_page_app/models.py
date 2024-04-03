@@ -1,12 +1,18 @@
 from django.db import models
 
 
+class Languages(models.Model):
+    lang = models.BooleanField(default=False)
+
+
 class Employee(models.Model):
     user_id = models.IntegerField()
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=12)
     date_created = models.DateTimeField(auto_now=True)
+
+    language = models.ForeignKey(Languages, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.name} {self.surname} "
@@ -19,25 +25,27 @@ class Employer(models.Model):
     phone_number = models.CharField(max_length=12)
     date_created = models.DateTimeField(auto_now=True)
 
+    language = models.ForeignKey(Languages, on_delete=models.SET_NULL, null=True)
+
     def __str__(self):
-        return f"{self.name} {self.surname}"
+        return f"{self.name} {self.surname}- {self.language}"
 
 
 class EmployeeCard(models.Model):
     owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     holder_name = models.CharField(max_length=100)
-    card_number = models.IntegerField(default=0,)
+    card_number = models.IntegerField(default=0, )
 
 
 class CV(models.Model):
     owner_id = models.OneToOneField(Employee, on_delete=models.CASCADE)
-    media = models.ImageField(upload_to="cv_images/")
+    media = models.CharField(max_length=50)
     bio = models.TextField()
     rating = models.IntegerField(default=1, choices=[(i, i) for i in range(1, 6)])
 
 
 class EmployeePassport(models.Model):
-    images_dir = models.ImageField(upload_to="passport_images/")
+    images_dir = models.CharField(max_length=50)
     owner_id = models.OneToOneField(Employee, on_delete=models.CASCADE)
     is_approved = models.BooleanField(default=False)
 

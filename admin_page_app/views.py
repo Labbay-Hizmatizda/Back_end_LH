@@ -1,7 +1,6 @@
 from rest_framework import generics
+
 from .serializers import *
-from rest_framework.response import Response
-from rest_framework import status
 
 
 class EmployeeListCreateAPIView(generics.ListCreateAPIView):
@@ -48,7 +47,7 @@ class EmployerListCreateAPIView(generics.RetrieveUpdateDestroyAPIView):
             queryset = queryset.filter(phone_number=phone_number)
 
         return queryset
-    
+
 
 class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
     queryset = EmployeeCard.objects.all()
@@ -263,3 +262,8 @@ class PaymentAppealListCreateAPIView(generics.ListCreateAPIView):
 class CategoryListCreateAPIView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+
+class LanguagesListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Languages.objects.all()
+    serializer_class = LanguagesSerializer

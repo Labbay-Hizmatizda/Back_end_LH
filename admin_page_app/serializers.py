@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import Employee, Employer, EmployeeCard, CV, EmployeePassport, Order, Proposals, JobAppeal, \
-    EmployeeReview, EmployerReview, Payment, PaymentAppeal, Job, Category
+    EmployeeReview, EmployerReview, Payment, PaymentAppeal, Job, Category, Languages
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -185,3 +185,9 @@ class PaymentAppealSerializer(serializers.ModelSerializer):
         if owner:
             data['owner_id'] = f"{owner['name']} {owner['surname']}"
         return data
+
+
+class LanguagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Languages
+        fields = '__all__'
