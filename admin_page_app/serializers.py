@@ -7,13 +7,21 @@ from .models import Employee, Employer, EmployeeCard, CV, EmployeePassport, Orde
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['user_id', 'name', 'surname', 'phone_number', 'date_created']
-
+        fields = '__all__'
 
 class EmployerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employer
         fields = '__all__'
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.surname = validated_data.get('surname', instance.surname)
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
+        instance.user_id = validated_data.get('user_id', instance.user_id)
+
+        instance.save()
+        return instance
 
 
 class EmployeeCardSerializer(serializers.ModelSerializer):

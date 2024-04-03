@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from .serializers import *
+from rest_framework.response import Response
 
 
 class EmployeeListCreateAPIView(generics.ListCreateAPIView):
@@ -26,7 +27,7 @@ class EmployeeListCreateAPIView(generics.ListCreateAPIView):
         return queryset
 
 
-class EmployerListCreateAPIView(generics.RetrieveUpdateDestroyAPIView):
+class EmployerListCreateAPIView(generics.ListCreateAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
 
@@ -47,6 +48,19 @@ class EmployerListCreateAPIView(generics.RetrieveUpdateDestroyAPIView):
             queryset = queryset.filter(phone_number=phone_number)
 
         return queryset
+
+
+class EmployerDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employer.objects.all()
+    serializer_class = EmployerSerializer
+    lookup_field = 'pk'        
+
+    def patch(self, request, *args, **kwargs):
+        employer = self.get_object()
+        serializer = self.get_serializer(employer, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
 
 
 class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
