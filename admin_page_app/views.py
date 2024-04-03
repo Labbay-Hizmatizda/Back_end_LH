@@ -10,11 +10,14 @@ class EmployeeListCreateAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        id = self.request.query_params.get('id', None)
         user_id = self.request.query_params.get('user_id', None)
         name = self.request.query_params.get('name', None)
         surname = self.request.query_params.get('surname', None)
         phone_number = self.request.query_params.get('phone_number', None)
 
+        if id:
+            queryset = queryset.filter(id=id)
         if user_id:
             queryset = queryset.filter(user_id=user_id)
         if name:
@@ -39,11 +42,14 @@ class EmployerListCreateAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        id = self.request.query_params.get('id', None)
         user_id = self.request.query_params.get('user_id', None)
         name = self.request.query_params.get('name', None)
         surname = self.request.query_params.get('surname', None)
         phone_number = self.request.query_params.get('phone_number', None)
 
+        if id:
+            queryset = queryset.filter(id=id)
         if user_id:
             queryset = queryset.filter(user_id=user_id)
         if name:
@@ -70,7 +76,10 @@ class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
         holder_name = self.request.query_params.get('holder_name', None)
+        id = self.request.query_params.get('id', None)
 
+        if id:
+            queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
         if holder_name:
@@ -93,7 +102,10 @@ class CVListCreateAPIView(generics.ListCreateAPIView):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
         rating = self.request.query_params.get('rating', None)
+        id = self.request.query_params.get('id', None)
 
+        if id:
+            queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
         if rating:
@@ -115,7 +127,10 @@ class EmployeePassportListCreateAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
+        id = self.request.query_params.get('id', None)
 
+        if id:
+            queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
 
@@ -137,7 +152,10 @@ class OrderListCreateAPIView(generics.ListCreateAPIView):
         owner_id = self.request.query_params.get('owner_id', None)
         category = self.request.query_params.get('category', None)
         price = self.request.query_params.get('price', None)
+        id = self.request.query_params.get('id', None)
 
+        if id:
+            queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
         if category:
@@ -162,7 +180,10 @@ class ProposalsListCreateAPIView(generics.ListCreateAPIView):
         owner_id = self.request.query_params.get('owner_id', None)
         order_id = self.request.query_params.get('order_id', None)
         price = self.request.query_params.get('price', None)
-
+        id = self.request.query_params.get('id', None)
+        
+        if id:
+            queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
         if price:
@@ -188,7 +209,10 @@ class JobListCreateAPIView(generics.ListCreateAPIView):
         proposal_id = self.request.query_params.get('proposal_id', None)
         price = self.request.query_params.get('price', None)
         rating = self.request.query_params.get('rating', None)
-
+        id = self.request.query_params.get('id', None)
+        
+        if id:
+            queryset = queryset.filter(id=id)
         if order_id:
             queryset = queryset.filter(owner_id=order_id)
         if proposal_id:
@@ -215,7 +239,10 @@ class JobAppealListCreateAPIView(generics.ListCreateAPIView):
         owner_id = self.request.query_params.get('owner_id', None)
         order_id = self.request.query_params.get('order_id', None)
         price = self.request.query_params.get('price', None)
-
+        id = self.request.query_params.get('id', None)
+        
+        if id:
+            queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
         if price:
@@ -241,7 +268,10 @@ class EmployeeReviewListCreateAPIView(generics.ListCreateAPIView):
         owner_id = self.request.query_params.get('owner_id', None)
         employer_id = self.request.query_params.get('employer_id', None)
         rate = self.request.query_params.get('rate', None)
-
+        id = self.request.query_params.get('id', None)
+        
+        if id:
+            queryset = queryset.filter(id=id)
         if job_id:
             queryset = queryset.filter(job_id=job_id)
         if owner_id:
@@ -269,7 +299,10 @@ class EmployerReviewListCreateAPIView(generics.ListCreateAPIView):
         owner_id = self.request.query_params.get('owner_id', None)
         employer_id = self.request.query_params.get('employer_id', None)
         rate = self.request.query_params.get('rate', None)
+        id = self.request.query_params.get('id', None)
 
+        if id:
+            queryset = queryset.filter(id=id)
         if job_id:
             queryset = queryset.filter(job_id=job_id)
         if owner_id:
@@ -294,7 +327,10 @@ class PaymentListCreateAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         job_id = self.request.query_params.get('job_id', None)
+        id = self.request.query_params.get('id', None)
 
+        if id:
+            queryset = queryset.filter(id=id)
         if job_id:
             queryset = queryset.filter(job_id=job_id)
 
@@ -313,7 +349,10 @@ class PaymentAppealListCreateAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
-
+        id = self.request.query_params.get('id', None)
+        
+        if id:
+            queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
 
