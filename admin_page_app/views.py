@@ -88,8 +88,8 @@ class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
         return queryset
     
 class EmployeeCardRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CV.objects.all()
-    serializer_class = CVSerializer
+    queryset = EmployeeCard.objects.all()
+    serializer_class = EmployeeCardSerializer
     lookup_field = 'pk' 
 
 
