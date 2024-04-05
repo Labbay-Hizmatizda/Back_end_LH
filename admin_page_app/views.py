@@ -1,7 +1,6 @@
 from rest_framework import generics
+
 from .serializers import *
-from rest_framework.response import Response
-from rest_framework import status
 
 
 class EmployeeListCreateAPIView(generics.ListCreateAPIView):
@@ -28,12 +27,12 @@ class EmployeeListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(phone_number=phone_number)
 
         return queryset
-    
+
+
 class EmployeeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
-    lookup_field = 'pk'        
-
+    lookup_field = 'pk'
 
 
 class EmployerListCreateAPIView(generics.ListCreateAPIView):
@@ -61,11 +60,11 @@ class EmployerListCreateAPIView(generics.ListCreateAPIView):
 
         return queryset
 
+
 class EmployerDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
-    lookup_field = 'pk'        
-
+    lookup_field = 'pk'
 
 
 class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
@@ -86,12 +85,12 @@ class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(holder_name=holder_name)
 
         return queryset
-    
+
+
 class EmployeeCardRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployeeCard.objects.all()
     serializer_class = EmployeeCardSerializer
-    lookup_field = 'pk' 
-
+    lookup_field = 'pk'
 
 
 class CVListCreateAPIView(generics.ListCreateAPIView):
@@ -112,12 +111,12 @@ class CVListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(rating=rating)
 
         return queryset
-    
+
+
 class CVRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CV.objects.all()
     serializer_class = CVSerializer
-    lookup_field = 'pk'  
-
+    lookup_field = 'pk'
 
 
 class EmployeePassportListCreateAPIView(generics.ListCreateAPIView):
@@ -135,12 +134,12 @@ class EmployeePassportListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(owner_id=owner_id)
 
         return queryset
-    
+
+
 class EmployeePassportRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployeePassport.objects.all()
     serializer_class = EmployeePassportSerializer
-    lookup_field = 'pk'        
-
+    lookup_field = 'pk'
 
 
 class OrderListCreateAPIView(generics.ListCreateAPIView):
@@ -165,10 +164,10 @@ class OrderListCreateAPIView(generics.ListCreateAPIView):
 
         return queryset
 
+
 class OrderRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-
 
 
 class ProposalsListCreateAPIView(generics.ListCreateAPIView):
@@ -181,7 +180,7 @@ class ProposalsListCreateAPIView(generics.ListCreateAPIView):
         order_id = self.request.query_params.get('order_id', None)
         price = self.request.query_params.get('price', None)
         id = self.request.query_params.get('id', None)
-        
+
         if id:
             queryset = queryset.filter(id=id)
         if owner_id:
@@ -192,11 +191,11 @@ class ProposalsListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(order_id=order_id)
 
         return queryset
-    
+
+
 class ProposalsRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Proposals.objects.all()
     serializer_class = ProposalsSerializer
-
 
 
 class JobListCreateAPIView(generics.ListCreateAPIView):
@@ -210,7 +209,7 @@ class JobListCreateAPIView(generics.ListCreateAPIView):
         price = self.request.query_params.get('price', None)
         rating = self.request.query_params.get('rating', None)
         id = self.request.query_params.get('id', None)
-        
+
         if id:
             queryset = queryset.filter(id=id)
         if order_id:
@@ -224,10 +223,10 @@ class JobListCreateAPIView(generics.ListCreateAPIView):
 
         return queryset
 
+
 class JobRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
-
 
 
 class JobAppealListCreateAPIView(generics.ListCreateAPIView):
@@ -240,7 +239,7 @@ class JobAppealListCreateAPIView(generics.ListCreateAPIView):
         order_id = self.request.query_params.get('order_id', None)
         price = self.request.query_params.get('price', None)
         id = self.request.query_params.get('id', None)
-        
+
         if id:
             queryset = queryset.filter(id=id)
         if owner_id:
@@ -251,11 +250,11 @@ class JobAppealListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(order_id=order_id)
 
         return queryset
-    
+
+
 class JobAppealRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = JobAppeal.objects.all()
     serializer_class = JobAppealSerializer
-
 
 
 class EmployeeReviewListCreateAPIView(generics.ListCreateAPIView):
@@ -269,7 +268,7 @@ class EmployeeReviewListCreateAPIView(generics.ListCreateAPIView):
         employer_id = self.request.query_params.get('employer_id', None)
         rate = self.request.query_params.get('rate', None)
         id = self.request.query_params.get('id', None)
-        
+
         if id:
             queryset = queryset.filter(id=id)
         if job_id:
@@ -283,10 +282,10 @@ class EmployeeReviewListCreateAPIView(generics.ListCreateAPIView):
 
         return queryset
 
+
 class EmployeeReviewRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployeeReview.objects.all()
     serializer_class = EmployeeReviewSerializer
-
 
 
 class EmployerReviewListCreateAPIView(generics.ListCreateAPIView):
@@ -314,10 +313,10 @@ class EmployerReviewListCreateAPIView(generics.ListCreateAPIView):
 
         return queryset
 
+
 class EmployerReviewRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployerReview.objects.all()
     serializer_class = EmployerReviewSerializer
-
 
 
 class PaymentListCreateAPIView(generics.ListCreateAPIView):
@@ -335,11 +334,11 @@ class PaymentListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(job_id=job_id)
 
         return queryset
-    
+
+
 class PaymentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
-
 
 
 class PaymentAppealListCreateAPIView(generics.ListCreateAPIView):
@@ -350,23 +349,24 @@ class PaymentAppealListCreateAPIView(generics.ListCreateAPIView):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
         id = self.request.query_params.get('id', None)
-        
+
         if id:
             queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
 
         return queryset
-    
+
+
 class PaymentAppealRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = PaymentAppeal.objects.all()
     serializer_class = PaymentAppealSerializer
 
 
-
 class CategoryListCreateAPIView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
 
 class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
