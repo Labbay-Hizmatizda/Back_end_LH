@@ -6,8 +6,8 @@ class Languages(models.Model):
 
     def __str__(self) -> str:
         if self.lang:
-            return 'Uzbek language'
-        return 'Russian language'
+            return f'Uzbek language {self.lang} {self.pk}'
+        return f'Russian language {self.lang} {self.pk}'
 
 
 class Employee(models.Model):
