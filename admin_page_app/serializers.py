@@ -76,6 +76,8 @@ class EmployeePassportSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    category = serializers.SerializerMethodField()
+
     class Meta:
         model = Order
         fields = '__all__'
@@ -83,6 +85,11 @@ class OrderSerializer(serializers.ModelSerializer):
     def get_owner_id(self, instance):
         owner = Employer.objects.get(id=instance.owner_id_id)
         return f"{owner.name} {owner.surname}"
+
+    def get_category(self, instance):
+        category_id = instance.category_id
+        category = Category.objects.get(id=category_id)
+        return category.name if category else None
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
