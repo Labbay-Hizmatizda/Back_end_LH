@@ -148,7 +148,7 @@ class OrderListCreateAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
-        category = self.request.query_params.get('category', None)
+        category_name = self.request.query_params.get('category_name', None)
         price = self.request.query_params.get('price', None)
         id = self.request.query_params.get('id', None)
 
@@ -156,8 +156,8 @@ class OrderListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(id=id)
         if owner_id:
             queryset = queryset.filter(owner_id=owner_id)
-        if category:
-            queryset = queryset.filter(category=category)
+        if category_name:
+            queryset = queryset.filter(category_name=category_name)
         if price:
             queryset = queryset.filter(price=price)
 
