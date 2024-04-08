@@ -58,7 +58,7 @@ class CV(models.Model):
 
 
 class EmployeePassport(models.Model):
-    images_dir = models.CharField(max_length=50)
+    images_dir = models.CharField(max_length=1000)
     owner_id = models.OneToOneField(Employee, on_delete=models.CASCADE)
     is_approved = models.BooleanField(default=False)
     data_time = models.DateTimeField(auto_now=True)
