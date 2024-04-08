@@ -25,7 +25,6 @@ class EmployeeListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(surname=surname)
         if phone_number:
             queryset = queryset.filter(phone_number=phone_number)
-
         return queryset
 
 
