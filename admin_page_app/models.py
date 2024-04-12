@@ -17,7 +17,7 @@ class Employee(models.Model):
     phone_number = models.CharField(max_length=12)
     date_created = models.DateTimeField(auto_now=True)
 
-    language = models.ForeignKey(Languages, on_delete=models.SET_NULL, null=True)
+    language = models.ForeignKey(Languages, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} {self.surname}"
