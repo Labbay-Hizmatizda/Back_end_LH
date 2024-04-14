@@ -161,7 +161,6 @@ class OrderListCreateAPIView(generics.ListCreateAPIView):
         if category_name:
             queryset = queryset.filter(category__name=category_name)
 
-
         return queryset
 
 
@@ -366,6 +365,16 @@ class PaymentAppealRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAP
 class CategoryListCreateAPIView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        id = self.request.query_params.get('id')
+        
+        if id:
+            queryset = queryset.filter(id=id)
+
+        return queryset
+
 
 
 class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
