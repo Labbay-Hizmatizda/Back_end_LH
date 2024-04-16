@@ -179,6 +179,7 @@ class ProposalsListCreateAPIView(generics.ListCreateAPIView):
         order_id = self.request.query_params.get('order_id', None)
         price = self.request.query_params.get('price', None)
         id = self.request.query_params.get('id', None)
+        is_active = self.request.query_params.get('is_active', None)
 
         if id:
             queryset = queryset.filter(id=id)
@@ -188,6 +189,8 @@ class ProposalsListCreateAPIView(generics.ListCreateAPIView):
             queryset = queryset.filter(price=price)
         if order_id:
             queryset = queryset.filter(order_id=order_id)
+        if is_active:
+            queryset = queryset.filter(is_active=is_active) 
 
         return queryset
 
