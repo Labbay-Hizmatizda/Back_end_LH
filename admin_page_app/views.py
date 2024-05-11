@@ -1,11 +1,13 @@
 from rest_framework import generics
 
+from .paginations import NumberPagination, PageNumberPagination
 from .serializers import *
 
 
 class EmployeeListCreateAPIView(generics.ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -32,11 +34,13 @@ class EmployeeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     lookup_field = 'pk'
+    pagination_class = NumberPagination
 
 
 class EmployerListCreateAPIView(generics.ListCreateAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -64,17 +68,22 @@ class EmployerDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
     lookup_field = 'pk'
+    pagination_class = NumberPagination
 
 
 class EmployeeCardListCreateAPIView(generics.ListCreateAPIView):
     queryset = EmployeeCard.objects.all()
     serializer_class = EmployeeCardSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
         owner_id = self.request.query_params.get('owner_id', None)
         holder_name = self.request.query_params.get('holder_name', None)
         id = self.request.query_params.get('id', None)
+        page_si
+
+        paginator = self.django_paginator_class(queryset, )
 
         if id:
             queryset = queryset.filter(id=id)
@@ -90,11 +99,13 @@ class EmployeeCardRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPI
     queryset = EmployeeCard.objects.all()
     serializer_class = EmployeeCardSerializer
     lookup_field = 'pk'
+    pagination_class = NumberPagination
 
 
 class CVListCreateAPIView(generics.ListCreateAPIView):
     queryset = CV.objects.all()
     serializer_class = CVSerializer
+    pagination_class = PageNumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -116,6 +127,7 @@ class CVRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CV.objects.all()
     serializer_class = CVSerializer
     lookup_field = 'pk'
+    pagination_class = NumberPagination
 
 
 class EmployeePassportListCreateAPIView(generics.ListCreateAPIView):
@@ -139,11 +151,13 @@ class EmployeePassportRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestro
     queryset = EmployeePassport.objects.all()
     serializer_class = EmployeePassportSerializer
     lookup_field = 'pk'
+    pagination_class = NumberPagination
 
 
 class OrderListCreateAPIView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -169,11 +183,13 @@ class OrderListCreateAPIView(generics.ListCreateAPIView):
 class OrderRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    pagination_class = NumberPagination
 
 
 class ProposalsListCreateAPIView(generics.ListCreateAPIView):
     queryset = Proposals.objects.all()
     serializer_class = ProposalsSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -197,11 +213,13 @@ class ProposalsListCreateAPIView(generics.ListCreateAPIView):
 class ProposalsRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Proposals.objects.all()
     serializer_class = ProposalsSerializer
+    pagination_class = NumberPagination
 
 
 class JobListCreateAPIView(generics.ListCreateAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -228,11 +246,13 @@ class JobListCreateAPIView(generics.ListCreateAPIView):
 class JobRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+    pagination_class = NumberPagination
 
 
 class JobAppealListCreateAPIView(generics.ListCreateAPIView):
     queryset = JobAppeal.objects.all()
     serializer_class = JobAppealSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -256,11 +276,13 @@ class JobAppealListCreateAPIView(generics.ListCreateAPIView):
 class JobAppealRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = JobAppeal.objects.all()
     serializer_class = JobAppealSerializer
+    pagination_class = NumberPagination
 
 
 class EmployeeReviewListCreateAPIView(generics.ListCreateAPIView):
     queryset = EmployeeReview.objects.all()
     serializer_class = EmployeeReviewSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -287,11 +309,13 @@ class EmployeeReviewListCreateAPIView(generics.ListCreateAPIView):
 class EmployeeReviewRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = EmployeeReview.objects.all()
     serializer_class = EmployeeReviewSerializer
+    pagination_class = NumberPagination
 
 
 class EmployerReviewListCreateAPIView(generics.ListCreateAPIView):
     queryset = EmployerReview.objects.all()
     serializer_class = EmployerReviewSerializer
+    pagination_class = NumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -362,18 +386,22 @@ class PaymentAppealListCreateAPIView(generics.ListCreateAPIView):
 class PaymentAppealRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = PaymentAppeal.objects.all()
     serializer_class = PaymentAppealSerializer
+    pagination_class = NumberPagination
 
 
 class CategoryListCreateAPIView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    pagination_class = NumberPagination
 
 
 class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    pagination_class = NumberPagination
 
 
 class LanguagesListCreateAPIView(generics.ListCreateAPIView):
     queryset = Languages.objects.all()
     serializer_class = LanguagesSerializer
+    pagination_class = NumberPagination

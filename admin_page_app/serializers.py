@@ -9,6 +9,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         model = Employee
         fields = '__all__'
 
+
 class EmployerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employer
@@ -87,9 +88,9 @@ class OrderSerializer(serializers.ModelSerializer):
         return f"{owner.name} {owner.surname}"
 
     def get_category(self, instance):
-        category_id = instance.category_id
-        category = Category.objects.get(id=category_id)
-        return category.name if category else None
+        category = instance.category.name
+        category_name = Category.objects.get(name=category)
+        return category_name.name if category else None
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

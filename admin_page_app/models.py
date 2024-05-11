@@ -16,7 +16,6 @@ class Employee(models.Model):
     surname = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=12)
     date_created = models.DateTimeField(auto_now=True)
-
     language = models.ForeignKey(Languages, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -29,7 +28,6 @@ class Employer(models.Model):
     surname = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=12)
     date_created = models.DateTimeField(auto_now=True)
-
     language = models.ForeignKey(Languages, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -39,7 +37,7 @@ class Employer(models.Model):
 class EmployeeCard(models.Model):
     owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     holder_name = models.CharField(max_length=100)
-    card_number = models.IntegerField(default=0, )
+    card_number = models.IntegerField(default=0)
     data_time = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
@@ -58,13 +56,13 @@ class CV(models.Model):
 
 
 class EmployeePassport(models.Model):
-    images_dir = models.CharField(max_length=1000)
+    images_dir = models.OneToOneField(Image, on_delete=models.CASCADE, null=True, blank=True)
     owner_id = models.OneToOneField(Employee, on_delete=models.CASCADE)
     is_approved = models.BooleanField(default=False)
     data_time = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return f'{self.owner_id.name}\'s password'
+        return f'{self.owner_id.name}\'s passport'
 
 
 class Category(models.Model):
@@ -75,25 +73,41 @@ class Category(models.Model):
         return self.name
 
 
+class Image(models.Model):
+    image = models.URLField(upload_to='images/')
+
+    # def __str__(self):
+    #     return f"Image {self.pk}"
+
+
+# class Video(models.Model):
+#     video = models.FileField(upload_to='videos/')
+#
+#     # def __str__(self):
+#     #     return f"Video {self.pk}"
+
+
 class Order(models.Model):
-    owner_id = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name="orders")
+    owner_id = models.OneToOneField(Employer, on_delete=models.CASCADE, related_name="orders")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category")
     description = models.TextField()
-    media = models.CharField(max_length=100)
+    image_field = models.ForeignKey(Image, on_delete=models.CASCADE)
+    link_field = models.OneToOneField(Video, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.CharField(max_length=255)
     location_link = models.URLField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
     data_time = models.DateTimeField(auto_now=True)
+    is_pending = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.owner_id.name}\'s {self.pk}'
+        return f'{self.owner_id.name}\'s {self.pk}::{self.category}'
 
 
 class Proposals(models.Model):
     owner_id = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="proposals")
     order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.IntegerField()
     is_active = models.BooleanField(default=True)
     data_time = models.DateTimeField(auto_now=True)
 
@@ -107,6 +121,7 @@ class Job(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
     data_time = models.DateTimeField(auto_now=True)
+    is_pending = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.order_id.owner_id.name} + {self.proposal_id.owner_id.name} in {self.price}'
